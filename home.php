@@ -39,40 +39,38 @@ if(!isset($pelanggan_id)){
 
 // }
 
-// if(isset($_POST['add_to_cart'])){
+if(isset($_POST['add_to_cart'])){
 
-//    $pid = $_POST['pid'];
-//    $pid = filter_var($pid, FILTER_SANITIZE_STRING);
-//    $p_name = $_POST['p_name'];
-//    $p_name = filter_var($p_name, FILTER_SANITIZE_STRING);
-//    $p_price = $_POST['p_price'];
-//    $p_price = filter_var($p_price, FILTER_SANITIZE_STRING);
-//    $p_image = $_POST['p_image'];
-//    $p_image = filter_var($p_image, FILTER_SANITIZE_STRING);
-//    $p_qty = $_POST['p_qty'];
-//    $p_qty = filter_var($p_qty, FILTER_SANITIZE_STRING);
+   $pid = $_POST['pid'];
+   $pid = filter_var($pid, FILTER_SANITIZE_STRING);
+   $p_name = $_POST['p_name'];
+   $p_name = filter_var($p_name, FILTER_SANITIZE_STRING);
+   $p_price = $_POST['p_price'];
+   $p_price = filter_var($p_price, FILTER_SANITIZE_STRING);
+   $p_image = $_POST['p_image'];
+   $p_image = filter_var($p_image, FILTER_SANITIZE_STRING);
+   $p_qty = $_POST['p_qty'];
+   $p_qty = filter_var($p_qty, FILTER_SANITIZE_STRING);
+   $p_fid_owner = $_POST['p_fid_owner'];
+   $p_fid_owner = filter_var($p_fid_owner, FILTER_SANITIZE_STRING);
 
-//    $check_cart_numbers = $conn->prepare("SELECT * FROM `cart` WHERE name = ? AND user_id = ?");
-//    $check_cart_numbers->execute([$p_name, $user_id]);
+   $check_cart_numbers = $conn->prepare("SELECT * FROM `permintaan` JOIN `produk` 
+   ON `permintaan`.`fid_produk` = `produk`.`id_produk` 
+   WHERE nama_produk = ? AND fid_pelanggan = ?");
+   $check_cart_numbers->execute([$p_name, $pelanggan_id]);
 
-//    if($check_cart_numbers->rowCount() > 0){
-//       $message[] = 'already added to cart!';
-//    }else{
 
-//       $check_wishlist_numbers = $conn->prepare("SELECT * FROM `wishlist` WHERE name = ? AND user_id = ?");
-//       $check_wishlist_numbers->execute([$p_name, $user_id]);
 
-//       if($check_wishlist_numbers->rowCount() > 0){
-//          $delete_wishlist = $conn->prepare("DELETE FROM `wishlist` WHERE name = ? AND user_id = ?");
-//          $delete_wishlist->execute([$p_name, $user_id]);
-//       }
+   if($check_cart_numbers->rowCount() > 0){
+      $message[] = 'already added to cart!';
+   }else{
 
-//       $insert_cart = $conn->prepare("INSERT INTO `cart`(user_id, pid, name, price, quantity, image) VALUES(?,?,?,?,?,?)");
-//       $insert_cart->execute([$user_id, $pid, $p_name, $p_price, $p_qty, $p_image]);
-//       $message[] = 'added to cart!';
-//    }
+      $insert_cart = $conn->prepare("INSERT INTO `permintaan`(jumlah_req, fid_pelanggan, fid_produk, fid_owner) VALUES(?,?,?,?)");
+      $insert_cart->execute([$p_qty, $pelanggan_id, $pid, $p_fid_owner]);
+      $message[] = 'added to cart!';
+   }
 
-// }
+}
 
 ?>
 
@@ -110,44 +108,6 @@ if(!isset($pelanggan_id)){
 
 </div>
 
-<!-- <section class="home-category">
-
-   <h1 class="title">shop by category</h1>
-
-   <div class="box-container">
-
-      <div class="box">
-         <img src="images/cat-1.png" alt="">
-         <h3>fruits</h3>
-         <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Exercitationem, quaerat.</p>
-         <a href="category.php?category=fruits" class="btn">fruits</a>
-      </div>
-
-      <div class="box">
-         <img src="images/cat-2.png" alt="">
-         <h3>meat</h3>
-         <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Exercitationem, quaerat.</p>
-         <a href="category.php?category=meat" class="btn">meat</a>
-      </div>
-
-      <div class="box">
-         <img src="images/cat-3.png" alt="">
-         <h3>vegitables</h3>
-         <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Exercitationem, quaerat.</p>
-         <a href="category.php?category=vegitables" class="btn">vegitables</a>
-      </div>
-
-      <div class="box">
-         <img src="images/cat-4.png" alt="">
-         <h3>fish</h3>
-         <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Exercitationem, quaerat.</p>
-         <a href="category.php?category=fish" class="btn">fish</a>
-      </div>
-
-   </div>
-
-</section> -->
-
 <section class="products">
 
    <h1 class="title">Produk</h1>
@@ -169,13 +129,12 @@ if(!isset($pelanggan_id)){
 
       <a href="view_page.php?pid=<?= $fetch_produk['id_produk']; ?>"><img src="uploaded_img/<?= $fetch_produk['produk_image']; ?>" alt=""></a>
       <div class="name"><?= $fetch_produk['nama_produk']; ?> - <?= $fetch_produk['varian']; ?></div>
-      <!-- <div class="details"><?//= $fetch_produk['details']; ?></div> -->
       <input type="hidden" name="pid" value="<?= $fetch_produk['id_produk']; ?>">
       <input type="hidden" name="p_name" value="<?= $fetch_produk['nama_produk']; ?>">
       <input type="hidden" name="p_price" value="<?= $fetch_produk['harga']; ?>">
       <input type="hidden" name="p_image" value="<?= $fetch_produk['image']; ?>">
+      <input type="hidden" name="p_fid_owner" value="<?= $fetch_produk['fid_owner']; ?>">
       <p>jumlah : <input type="number" min="1" value="1" name="p_qty" class="qty"></p>
-      <!-- <input type="submit" value="add to wishlist" class="option-btn" name="add_to_wishlist"> -->
       <input type="submit" value="Tambah Permintaan" class="btn" name="add_to_cart">
    </form>
    <?php
@@ -195,7 +154,7 @@ if(!isset($pelanggan_id)){
 
 
 
-<?php //include 'footer.php'; ?>
+<?php include 'footer.php'; ?>
 
 <script src="js/script.js"></script>
 

@@ -145,11 +145,11 @@ if(isset($message)){
       <input type="password" name="cpass" class="box" placeholder="konfirmasi password" required>
       <input type="file" name="image" class="box" required accept="image/jpg, image/jpeg, image/png" placeholder="pilih foto profil" required>
       <input type="submit" value="register now" class="btn" name="submit">
-      <p>already have an account? <a href="login.php">login now</a></p>
+      <p>Sudah memiliki akun? <a href="login_owner.php">login now</a></p>
    </form>
 
 </section>
 
-
+<script src="js/script.js"></script>
 </body>
 </html>

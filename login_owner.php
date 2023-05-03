@@ -1,6 +1,6 @@
 <?php
 
-@include 'config.php';
+@include 'koneksi.php';
 
 session_start();
 
@@ -19,20 +19,9 @@ if(isset($_POST['submit'])){
    $row = $stmt->fetch(PDO::FETCH_ASSOC);
 
    if($rowCount > 0){
-
-      if($row['user_type'] == 'owner'){
-
-         $_SESSION['owner_id'] = $row['id_owner'];
-         header('location:admin_page.php');
-
-      // }elseif($row['user_type'] == 'user'){
-
-      //    $_SESSION['user_id'] = $row['id'];
-      //    header('location:home.php');
-
-      }else{
-         $message[] = 'no owner found!';
-      }
+    
+    $_SESSION['owner_id'] = $row['id_owner'];
+    header('location:owner_page.php');
 
    }else{
       $message[] = 'incorrect email or password!';
@@ -54,7 +43,7 @@ if(isset($_POST['submit'])){
    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
 
    <!-- custom css file link  -->
-   <link rel="stylesheet" href="css/comps.css">
+   <link rel="stylesheet" href="css/comp.css">
 
 </head>
 <body>
@@ -73,6 +62,35 @@ if(isset($message)){
 }
 
 ?>
+<header class="header">
+
+<div class="flex">
+
+   <a href="" class="logo">J-Star<span>.</span></a>
+
+   <!-- <nav class="navbar">
+      <a href="home.php">home</a>
+      <a href="produk.php">produk</a>
+      <a href="orders.php">permintaan</a>
+   </nav> -->
+
+   <div class="icons">
+      <div id="user-btn" class="fas fa-user"></div>
+
+   </div>
+
+   <div class="profile">
+      <a href="login_owner.php" class="btn">login</a>
+      <a href="registrasi.php" class="delete-btn">registrasi</a>
+      <!-- <div class="flex-btn">
+         <a href="login.php" class="option-btn">login</a>
+         <a href="register.php" class="option-btn">register</a>
+      </div> -->
+   </div>
+
+</div>
+
+</header>
    
 <section class="form-container">
 
@@ -80,14 +98,28 @@ if(isset($message)){
 
    <form action="" method="POST">
       <h3>Selamat Datang!</h3>
+      <h2>Owner</h2>
       <input type="email" name="email" class="box" placeholder="Masukkan Email Anda" required>
       <input type="password" name="pass" class="box" placeholder="Masukkan Password Anda" required>
       <input type="submit" value="Masuk" class="btn" name="submit">
-      <p>Belum punya akun? <a href="register.php">Daftar disini</a></p>
+      <p>Belum punya akun? <a href="registrasi.php">Daftar disini</a></p>
    </form>
 
 </section>
 
+<script>
+    let profile = document.querySelector('.header .flex .profile');
+
+    document.querySelector('#user-btn').onclick = () =>{
+        profile.classList.toggle('active');
+
+    }
+
+    window.onscroll = () =>{
+        profile.classList.remove('active');
+
+    }
+</script>
 
 </body>
 </html>

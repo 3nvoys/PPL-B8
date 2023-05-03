@@ -54,7 +54,7 @@ if(isset($_POST['submit'])){
    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
 
    <!-- custom css file link  -->
-   <link rel="stylesheet" href="css/comps.css">
+   <link rel="stylesheet" href="css/comp.css">
 
 </head>
 <body>
@@ -73,6 +73,35 @@ if(isset($message)){
 }
 
 ?>
+<header class="header">
+
+<div class="flex">
+
+   <a href="" class="logo">J-Star<span>.</span></a>
+
+   <!-- <nav class="navbar">
+      <a href="home.php">home</a>
+      <a href="produk.php">produk</a>
+      <a href="orders.php">permintaan</a>
+   </nav> -->
+
+   <div class="icons">
+      <!-- <div id="menu-btn" class="fas fa-bars"></div> -->
+      <div id="user-btn" class="fas fa-user"></div>
+   </div>
+
+   <div class="profile">
+      <a href="login_pelanggan.php" class="btn">login</a>
+      <!-- <a href="logout.php" class="delete-btn">register</a> -->
+      <!-- <div class="flex-btn">
+         <a href="login.php" class="option-btn">login</a>
+         <a href="register.php" class="option-btn">register</a> -->
+      </div>
+   </div>
+
+</div>
+
+</header>
    
 <section class="form-container">
 
@@ -88,6 +117,18 @@ if(isset($message)){
 
 </section>
 
+<script>
+    let profile = document.querySelector('.header .flex .profile');
 
+    document.querySelector('#user-btn').onclick = () =>{
+        profile.classList.toggle('active');
+
+    }
+
+    window.onscroll = () =>{
+        profile.classList.remove('active');
+
+    }
+</script>
 </body>
 </html>
