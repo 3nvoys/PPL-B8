@@ -21,7 +21,7 @@ if(isset($message)){
 
       <nav class="navbar">
          <a href="owner_page.php">home</a>
-         <a href="owner_products.php">products</a>
+         <a href="owner_products.php">produk</a>
          <a href="owner_orders.php">permintaan</a>
          <a href="owner_users.php">pelanggan</a>
          <!-- <a href="owner_contacts.php">messages</a> -->

@@ -66,7 +66,7 @@ if(isset($_POST['submit'])){
    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
 
    <!-- custom css file link  -->
-   <link rel="stylesheet" href="css/comps.css">
+   <link rel="stylesheet" href="css/comp.css">
 
 </head>
 <body>
@@ -111,15 +111,8 @@ if(isset($message)){
       </div>
 
       <div class="profile">
-         <?php
-            $select_profile = $conn->prepare("SELECT * FROM `pelanggan` WHERE id_pelanggan = ?");
-            $select_profile->execute([$pelanggan_id]);
-            $fetch_profile = $select_profile->fetch(PDO::FETCH_ASSOC);
-         ?>
-         <img src="uploaded_img/<?= $fetch_profile['image']; ?>" alt="">
-         <p><?= $fetch_profile['nama']; ?></p>
-         <a href="user_profile_update.php" class="btn">update profile</a>
-         <a href="logout.php" class="delete-btn">logout</a>
+         <!-- <a href="user_profile_update.php" class="btn">update profile</a> -->
+         <!-- <a href="logout.php" class="delete-btn">logout</a> -->
          <div class="flex-btn">
             <a href="login.php" class="option-btn">login</a>
             <a href="register.php" class="option-btn">register</a>
@@ -150,6 +143,18 @@ if(isset($message)){
 
 </section>
 
-<script src="js/script.js"></script>
+<script>
+    let profile = document.querySelector('.header .flex .profile');
+
+    document.querySelector('#user-btn').onclick = () =>{
+        profile.classList.toggle('active');
+
+    }
+
+    window.onscroll = () =>{
+        profile.classList.remove('active');
+
+    }
+</script>
 </body>
 </html>

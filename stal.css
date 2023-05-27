@@ -1,0 +1,48 @@
+@import url('https://fonts.googleapis.com/css?family=Poppins:400,500,600,700&display=swap');
+html,body{
+  font-family: 'Poppins', sans-serif;
+  background-color: violet;
+}
+body {
+    background-color: violet;
+    /* background-size: cover; */
+    /* filter: blur(5px) ; */
+    /* z-index: -1; */
+    
+    /* background: linear-gradient(to right, #0062E6, #33AEFF); */
+  }
+  
+  .card-img-left {
+    width: 45%;
+    /* Link to your background image using in the property below! */
+    background: scroll center url('download.jfif');
+    background-size: cover;
+  }
+  
+  .btn-login {
+    font-size: 0.9rem;
+    letter-spacing: 0.05rem;
+    padding: 0.75rem 1rem;
+  }
+
+  .login-heading {
+    font-weight: 300;
+  }
+
+  .container .form form .button{
+    background: #a35fdf;
+    color: #fff;
+    font-size: 17px;
+    font-weight: 500;
+    transition: all 0.3s ease;
+}
+
+.container .form form .button:hover{
+    background: #5757d1;
+}
+.container .form form .link{
+    padding: 5px 0;
+}
+.container .form form .link a{
+    color: #6665ee;
+}

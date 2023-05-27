@@ -30,7 +30,7 @@ if(isset($message)){
       <div class="icons">
          <div id="menu-btn" class="fas fa-bars"></div>
          <div id="user-btn" class="fas fa-user"></div>
-         <a href="search_page.php" class="fas fa-search"></a>
+         <!-- <a href="search_page.php" class="fas fa-search"></a> -->
          <?php
             $count_cart_items = $conn->prepare("SELECT * FROM `permintaan` WHERE fid_pelanggan = ?");
             $count_cart_items->execute([$pelanggan_id]);
